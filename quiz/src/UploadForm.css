@@ -1,0 +1,163 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 120vh; /* Increase the height */
+}
+
+
+
+.hero {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.7rem;
+  margin-bottom: 20px;
+  color: #362c2c; /* Change text color to darker shade */
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #1f1717; /* Change text color to darker shade */
+}
+
+.card {
+  width: 500px; /* Increase max-width */
+  padding: 30px;
+  border-radius: 20px;
+  background: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent) left,
+    linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent) right,
+    linear-gradient(to bottom, rgba(197, 244, 248, 0.8), transparent) top,
+    linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent) bottom,
+    #fefdfd; /* Fallback color */
+  background-blend-mode: multiply;
+  box-shadow:   
+    0 0 0 10px rgba(197, 220, 245, 0.5), /* First border with fading effect */
+    0 0 0 20px rgba(220, 169, 243, 0.5); /* Second border with fading effect */
+}
+
+
+
+.card img {
+  width: 180px; /* Adjust the width */ 
+  height: auto; /* Maintain aspect ratio */
+  margin: 0 auto 20px;
+  display: block;
+}
+
+
+
+
+.file-description {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.file-cta {
+  display: inline-block;
+  cursor: pointer;
+  padding: 12px 24px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  color: #007bff;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.file-cta:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.file-icon {
+  margin-right: 10px;
+}
+
+.file-name {
+  font-size: 1rem;
+  color: #555;
+}
+
+.button {
+  margin-top: 30px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+/* Hide the "Choose file" text and replace it with "Browse" */
+.file-input {
+  display: none; /* Hide the default file input */
+}
+
+.file-cta {
+  display: inline-block;
+  cursor: pointer;
+  padding: 12px 24px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  color: #007bff;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.file-cta:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.file-icon {
+  margin-right: 10px;
+}
+
+.file-name {
+  font-size: 1rem;
+  color: #555;
+}
+
+
+/* Apply gradient background to pseudo-element */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(45deg, #a4f8f8, #cc9bf7, #e9f7b4); /* Gradient background */
+  animation: moveBackground 10s linear infinite;
+}
+
+
+/* Update body background with gradient and animation
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(45deg, #a4f8f8, #cc9bf7, #e9f7b4);
+  animation: moveBackground 10s linear infinite ;
+}*/
+
+/* Define animation */
+@keyframes moveBackground {
+  from {
+    background-position: 0% 50%; /* Start position (left) */
+  }
+  to {
+    background-position: 100% 50%; /* End position (right) */
+  }
+}
+
