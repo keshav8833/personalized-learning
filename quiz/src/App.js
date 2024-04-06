@@ -1,12 +1,20 @@
+
+
+
 import React from 'react';
-import UploadForm from './UploadForm'; // Import the UploadForm component
+import { BrowserRouter as Router, Routes , Route } from 'react-router-dom';
+import UploadForm from './UploadForm';
+import QuizzesPage from './QuizzesPage';
 
 function App() {
-  return (
-    <div>
-      <UploadForm /> {}
-    </div>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route exact path="/" element={<UploadForm />} />
+                <Route path="/quizzes" element={<QuizzesPage />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;

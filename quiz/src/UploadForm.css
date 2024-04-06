@@ -161,3 +161,8 @@ body {
   }
 }
 
+
+
+.pdf-selected .file-name {
+  color: red;
+}

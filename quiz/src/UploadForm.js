@@ -1,19 +1,21 @@
-
-
-
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import './UploadForm.css'; // Import CSS file for styling
 
 function UploadForm() {
   const [fileName, setFileName] = useState('No file uploaded');
   const [difficultyLevel, setDifficultyLevel] = useState('');
+  const [fileSelected, setFileSelected] = useState(false); // State to track if a file is selected
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setFileName(file.name);
+      setFileSelected(true);
     } else {
       setFileName('No file uploaded');
+      setFileSelected(false);
     }
   };
 
@@ -22,8 +24,10 @@ function UploadForm() {
     const file = event.dataTransfer.files[0];
     if (file) {
       setFileName(file.name);
+      setFileSelected(true);
     } else {
       setFileName('No file uploaded');
+      setFileSelected(false);
     }
   };
 
@@ -31,57 +35,36 @@ function UploadForm() {
     setDifficultyLevel(event.target.value);
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   // Create a FormData object to store form data
-  //   const formData = new FormData();
-  //   formData.append('file', fileName);
-  //   formData.append('difficulty', difficultyLevel);
-
-  //   // Send a POST request to the Flask server
-  //   fetch('http://localhost:5000/submit', {
-  //     method: 'POST',
-  //     body: formData
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     console.log(data); // Log response from the server
-  //     // Reset form fields if needed
-  //   })
-  //   .catch(error => {
-  //     console.error('Error:', error); // Log any errors
-  //   });
-  // };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     // Create a FormData object to store form data
     const formData = new FormData();
     const fileInput = document.querySelector('input[type="file"]');
     formData.append('file', fileInput.files[0]); // Append the file itself
-  
+
     // Append other form data
     formData.append('difficulty', difficultyLevel);
-  
-    // Send a POST request to the Flask server
-    fetch('http://localhost:5000/submit', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data); // Log response from the server
-      // Reset form fields if needed
-    })
-    .catch(error => {
+
+    try {
+      // Send a POST request to the server
+      const response = await fetch('http://localhost:5000/submit', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data); // Log response from the server
+        // Reset form fields if needed
+        navigate('/quizzes'); // Navigate to QuizzesPage component using useNavigate
+      } else {
+        console.error('Error:', response.statusText); // Log error message
+      }
+    } catch (error) {
       console.error('Error:', error); // Log any errors
-    });
+    }
   };
-  
-
-
 
   return (
     <div className="container">
@@ -92,7 +75,7 @@ function UploadForm() {
         <p className="is-size-5 has-text-black has-text-weight-medium has-text-centered"> Practice More • Learn More </p>
       </div>
       <div className="card-container">
-        <div className="card has-text-centered" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
+        <div className={`card has-text-centered ${fileSelected ? 'pdf-selected' : ''}`} onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
           <img src="https://cdn4.iconfinder.com/data/icons/files-and-folders-thinline-icons-set/144/File_PDF-512.png" alt="upload" />
           <h4 className="file-description"> Choose/Drag & Drop a file </h4>
           <form onSubmit={handleSubmit} encType="multipart/form-data">
